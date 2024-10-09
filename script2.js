@@ -1,50 +1,42 @@
+function calculadora (a, b, operacao) {
 
- // EXERCICIO 1 
+    a = Number(a);
+    b = Number(b);
+    
+    let resultado;
 
-let idade = prompt("Digite sua idade: ")
-
-if (idade >= 18) {
-    console.log("Você é maior de idade")
-} else  {
-    console.log ("Voçê é menor de idade")
-}
-
-
-// EXERCICIO 2
-
-let numero = prompt("Digite um numero positivo: ")
-
-if (numero % 2 === 0){
-    console.log("o numero " + numero, "é PAR")
-} else if (numero % 2 != 0) {
-    console.log ("o numero " + numero, "é IMPAR")
-} else {
-    console.log ("o numero precisa ser positivo!!")
-}
-
-
-
-// EXERCICIO 3
-
-let numero2 = prompt("Digite um numero ")
-
-if (numero2 > 0) {
-    console.log("O numero é positivo")
-} else if (numero2 < 0) {
-    console.log("O numero é negativo")
-} else {
-    console.log("ZERO")
-}
-
-
-// EXERCICIO 4
-
-
-function tabuada (number){
-    for (let i = 1; i < 11; i++) {
-        total = i * number
-        console.log(i + " x " + number + " = " + total)
+    switch(operacao)
+    {
+        case '1':
+            resultado = a + b
+            break;
+        case '2':
+            resultado = a - b
+            break;
+        case '3':
+            resultado = a * b
+            break;
+        case '4':
+            resultado = a / b
+            break; 
+        default:
+            console.log('opção inváliada')
+            return
     }
+
+    console.log('resultado:', resultado)
+}
+function operacaoEscolha (){
+    let operacao = prompt(
+        "Escolha a operação:\n1. SOMAR\n2. SUBTRAIR\n3. MULTIPLICAR\n4. DIVIDIR"
+    );
+    return operacao
 }
 
-tabuada(number = prompt("Digite um numero: "));
+
+let valorA = prompt('Digite o valor de A:')
+let valorB = prompt("Digite o valor de B:")
+let operacao = operacaoEscolha();
+
+calculadora(valorA, valorB, operacao);
+
