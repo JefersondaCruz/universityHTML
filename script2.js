@@ -1,42 +1,41 @@
-function calculadora (a, b, operacao) {
+let arrayCharacters = [];
 
-    a = Number(a);
-    b = Number(b);
-    
-    let resultado;
+function getCharacters() { 
+    fetch("https://rickandmortyapi.com/api/character/?page=19",
+        {
+            method: "GET",
 
-    switch(operacao)
-    {
-        case '1':
-            resultado = a + b
-            break;
-        case '2':
-            resultado = a - b
-            break;
-        case '3':
-            resultado = a * b
-            break;
-        case '4':
-            resultado = a / b
-            break; 
-        default:
-            console.log('opção inváliada')
-            return
+        }
+    )
+    .then((response) => response.json())
+    .then((data)=> {
+        arrayCharacters = data.results;
+        appendCharacters(arrayCharacters);   
+        
+    })
+    .catch((error) =>{
+        console.error("error", error);
+    });
+}
+
+getCharacters();
+
+function appendCharacters(Characters) {
+    let place = document.querySelector("#data-output");
+    let out = "";
+
+    for (let Character of Characters) {
+        out += `<ul>
+                    <img src="${Character.image}" alt="">
+                    <li> Nome: ${Character.name}</li>
+                    <li> Status: ${Character.status}</li>
+                    <li> Espécie:  ${Character.species}</td>
+                    <li> Gênero: ${Character.gender}</li>
+                    <li> Origem: ${Character.origin.name}</li>
+                    <li> Localização: ${Character.location.name}</li>
+                </ul>
+            `;
     }
-
-    console.log('resultado:', resultado)
+    place.innerHTML = out;
 }
-function operacaoEscolha (){
-    let operacao = prompt(
-        "Escolha a operação:\n1. SOMAR\n2. SUBTRAIR\n3. MULTIPLICAR\n4. DIVIDIR"
-    );
-    return operacao
-}
-
-
-let valorA = prompt('Digite o valor de A:')
-let valorB = prompt("Digite o valor de B:")
-let operacao = operacaoEscolha();
-
-calculadora(valorA, valorB, operacao);
 
